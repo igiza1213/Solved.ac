@@ -8,11 +8,7 @@ export const solution = (stdinInput: string) => {
     .split(" ")
     .map((value) => parseInt(value));
 
-  console.log(a + b);
-  console.log(a - b);
-  console.log(a * b);
-  console.log(Math.floor(a / b));
-  console.log(a % b);
+  console.log(a === b ? "==" : a > b ? ">" : "<");
 };
 
 solution(input);
