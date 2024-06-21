@@ -9,6 +9,10 @@ export const solution = (stdinInput: string) => {
     .map((value) => parseInt(value));
 
   console.log(a + b);
+  console.log(a - b);
+  console.log(a * b);
+  console.log(a / b);
+  console.log(a % b);
 };
 
 solution(input);

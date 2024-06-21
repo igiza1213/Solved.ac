@@ -1,22 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
-      "moduleResolution": "Node",
-      "preserveValueImports": false,
-      "lib": ["ESNext", "ESNext.Array"],
-      "outDir": "./out",
-      "rootDir": "./src",
-      "downlevelIteration": true,
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
-    },
-    "ts-node": {
-      "esm": true
-    },
-    "exclude": ["node_modules"],
-    "include": ["**/*.ts"]
-  }
-  
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "ES5",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "noImplicitAny": false,
+    "paths": { "*": ["node_modules/"] }
+  },
+  "include": ["src/**/*.ts"]
+}
