@@ -3,12 +3,14 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput
+  const [...T] = stdinInput
     .trim()
-    .split(" ")
-    .map(Number);
+    .split("\n")
+    .map((line) => line.split(" ").map(Number));
 
-  console.log(a === b ? "==" : a > b ? ">" : "<");
+  T.map((value, i) => {
+    console.log(value[1] ? value[0] + value[1] : "");
+  });
 };
 
 solution(input);
