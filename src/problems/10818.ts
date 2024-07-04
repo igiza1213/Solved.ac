@@ -3,12 +3,10 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput
-    .trim()
-    .split(" ")
-    .map(Number);
+  const [T, ...N] = stdinInput.trim().split("\n");
 
-  console.log(a - b);
+  const num = N[0].split(" ").map(Number);
+  console.log(Math.min(...num), Math.max(...num));
 };
 
 solution(input);

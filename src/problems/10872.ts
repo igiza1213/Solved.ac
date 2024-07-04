@@ -2,13 +2,17 @@ import fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
-export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput
-    .trim()
-    .split(" ")
-    .map(Number);
+function factorial(n: number): number {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
 
-  console.log(a - b);
+export const solution = (stdinInput: string) => {
+  const n = Number(stdinInput.trim());
+
+  console.log(factorial(n));
 };
 
 solution(input);
