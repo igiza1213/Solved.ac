@@ -6,7 +6,7 @@ export const solution = (stdinInput: string) => {
   const input_list = stdinInput.trim().split(" ").map(Number);
   const default_list = [1, 1, 2, 2, 2, 8];
 
-  let result = [];
+  let result:number[] = [];
   for (let i = 0; i < 6; i++) {
     result.push(default_list[i] - input_list[i]);
   }
