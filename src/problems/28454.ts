@@ -3,10 +3,9 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput.trim().split(/\s/).map(BigInt);
-
-  console.log((a / b).toString());
-  console.log((a % b).toString());
+  const [cur, n, ...arr] = stdinInput.trim().split(/\s/);
+  const curDate = new Date(cur);
+  console.log(arr.filter((value) => curDate <= new Date(value)).length);
 };
 
 solution(input);

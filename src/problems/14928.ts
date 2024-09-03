@@ -3,10 +3,9 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput.trim().split(/\s/).map(BigInt);
+  const n = BigInt(stdinInput.trim());
 
-  console.log((a / b).toString());
-  console.log((a % b).toString());
+  console.log((n % BigInt(20000303)).toString());
 };
 
 solution(input);

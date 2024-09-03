@@ -3,10 +3,11 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput.trim().split(/\s/).map(BigInt);
+  const [n, ...arr] = stdinInput.trim().split(/\s/).map(Number);
 
-  console.log((a / b).toString());
-  console.log((a % b).toString());
+  arr.filter((value) => value).length > n / 2
+    ? console.log("Junhee is cute!")
+    : console.log("Junhee is not cute!");
 };
 
 solution(input);

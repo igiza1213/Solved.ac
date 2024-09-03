@@ -3,10 +3,10 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [a, b] = stdinInput.trim().split(/\s/).map(BigInt);
+  const n = Number(stdinInput.trim());
 
-  console.log((a / b).toString());
-  console.log((a % b).toString());
+  const s = "WelcomeToSMUPC";
+  console.log(s[(n % s.length) - 1 == -1 ? 13 : (n % s.length) - 1]);
 };
 
 solution(input);
