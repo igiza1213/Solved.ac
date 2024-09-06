@@ -22,6 +22,7 @@
       "akamud.vscode-theme-onedark"
       "esbenp.prettier-vscode"
       "formulahendry.code-runner"
+      "WakaTime.vscode-wakatime"
     ];
 
     # Enable previews
