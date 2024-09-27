@@ -38,7 +38,7 @@ export class LinkedList {
     this.head = null;
   }
 
-  insetAt(index: number, value: number) {
+  insertAt(index: number, value: number) {
     if (index > this.count || index < 0) {
       throw new Error("범위를 넘어갔습니다.");
     }
