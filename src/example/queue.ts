@@ -1,16 +1,16 @@
-class Node {
-  value: number;
-  next: Node | null;
+class Node<T> {
+  value: T;
+  next: Node<T> | null;
 
-  constructor(value: number) {
+  constructor(value: T) {
     this.value = value;
     this.next = null;
   }
 }
 
-export class Queue {
-  front: Node | null;
-  rear: Node | null;
+export class Queue<T> {
+  front: Node<T> | null;
+  rear: Node<T> | null;
   size: number;
 
   constructor() {
@@ -19,7 +19,7 @@ export class Queue {
     this.size = 0;
   }
 
-  enqueue(item: number) {
+  enqueue(item: T) {
     const newNode = new Node(item);
     if (!this.front || !this.rear) {
       this.front = newNode;
