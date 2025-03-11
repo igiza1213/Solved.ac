@@ -5,13 +5,17 @@ var input = fs.readFileSync(__dirname + filePath).toString();
 export const solution = (stdinInput: string) => {
   const [n, ...arr] = stdinInput.trim().split(/\s/).map(Number);
 
-  arr.sort((a, b) => a - b);
+  try {
+    arr.map((value, i) => {
+      if (Math.abs(value - (i + 1)) % 2 == 1) {
+        throw new Error("stop loop");
+      }
+    });
 
-  console.log(
-    arr
-      .map((value, i) => arr.slice(0, i + 1).reduce((a, b) => a + b, 0))
-      .reduce((a, b) => a + b)
-  );
+    console.log("YES");
+  } catch (error) {
+    console.log("NO");
+  }
 };
 
 solution(input);

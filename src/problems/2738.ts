@@ -16,7 +16,7 @@ export const solution = (stdinInput: string) => {
     result[i] = arr[i].map((value, index) => value + arr[i + N][index]);
   }
 
-  console.log(result.map(line=>line.join(" ")).join("\n"));
+  console.log(result.map((line) => line.join(" ")).join("\n"));
 };
 
 solution(input);

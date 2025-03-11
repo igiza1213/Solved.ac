@@ -3,15 +3,11 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
 var input = fs.readFileSync(__dirname + filePath).toString();
 
 export const solution = (stdinInput: string) => {
-  const [n, ...arr] = stdinInput.trim().split(/\s/).map(Number);
+  const n = +stdinInput.trim();
 
-  arr.sort((a, b) => a - b);
+  const len = Math.floor((n - 1) / 9) + 1;
 
-  console.log(
-    arr
-      .map((value, i) => arr.slice(0, i + 1).reduce((a, b) => a + b, 0))
-      .reduce((a, b) => a + b)
-  );
+  console.log(n % 2 && !(len % 2) ? len + 1 : len);
 };
 
 solution(input);
