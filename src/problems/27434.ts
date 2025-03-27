@@ -83,7 +83,7 @@ class Heap {
   }
 }
 
-class PriorityQueue extends Heap {
+export class PriorityQueue extends Heap {
   enqueue = (value: bigint) => this.insert(value);
   dequeue = () => this.remove();
   isEmpty = () => this.heap.length <= 0;
