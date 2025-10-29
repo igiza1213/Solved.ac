@@ -8,7 +8,7 @@
   packages = [
     pkgs.sudo
     pkgs.python311
-    # pkgs.python311Packages.pip
+    pkgs.python311Packages.pip
     # pkgs.nodejs_20
     # pkgs.nodePackages.nodemon
   ];
@@ -23,6 +23,9 @@
       "esbenp.prettier-vscode"
       "formulahendry.code-runner"
       "WakaTime.vscode-wakatime"
+      "ms-python.black-formatter"
+      "ms-python.debugpy"
+      "ms-python.python"
     ];
 
     # Enable previews

@@ -5,14 +5,7 @@ var input = fs.readFileSync(__dirname + filePath).toString();
 export const solution = (stdinInput: string) => {
   const [n, ...arr] = stdinInput.trim().split(/\s/).map(Number);
 
-  let dp = [1];
-
-  for (let i = 1; i < n; i++) {
-    dp[i] = Math.max(
-      ...arr.slice(0, i).map((value, j) => (value < arr[i] ? dp[j] + 1 : dp[0]))
-    );
-  }
-  console.log(Math.max(...dp));
+  console.log(arr.map((v) => "$" + (v * 0.8).toFixed(2)).join("\n"));
 };
 
 solution(input);

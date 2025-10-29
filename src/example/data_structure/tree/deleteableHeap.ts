@@ -1,6 +1,6 @@
 export class Heap<T> {
   size: number = 0;
-  heap: T[] = [];
+  readonly heap: T[] = [];
   private comparator: (a: T, b: T) => boolean;
 
   constructor(
@@ -27,7 +27,7 @@ export class Heap<T> {
     }
   }
 
-  peek = () => this.heap[0];
+  peek = () => this.heap[1];
 
   insert(item: T) {
     let i = ++this.size;
@@ -67,26 +67,39 @@ export class Heap<T> {
     return item;
   }
 }
+export class DeleteableHeap<T> {
+  readonly data: Heap<T>;
+  readonly deleted: Heap<T>;
+  constructor(
+    comparator: "MIN" | "MAX" | ((a: T, b: T) => boolean) = "MAX",
+    list?: T[]
+  ) {
+    this.data = new Heap<T>(comparator, list);
+    this.deleted = new Heap<T>(comparator, list);
+  }
 
-import fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
-var input = fs.readFileSync(__dirname + filePath).toString();
+  getSize() {
+    this.adjust();
+    return this.data.size;
+  }
 
-export const solution = (stdinInput: string) => {
-  const [N, ...arr] = stdinInput.trim().split(/\s/).map(Number);
+  insert(item: T) {
+    this.data.insert(item);
+  }
 
-  let heap = new Heap<number>();
-  let result: number[] = [];
+  delete(item: T) {
+    this.deleted.insert(item);
+  }
 
-  arr.map((value) => {
-    if (value === 0) {
-      result.push(heap.delete());
-    } else {
-      heap.insert(value);
+  peek() {
+    this.adjust();
+    return this.data.peek();
+  }
+
+  adjust() {
+    while (this.deleted.size > 0 && this.data.peek() === this.deleted.peek()) {
+      this.data.delete();
+      this.deleted.delete();
     }
-  });
-
-  console.log(result.join("\n"));
-};
-
-solution(input);
+  }
+}

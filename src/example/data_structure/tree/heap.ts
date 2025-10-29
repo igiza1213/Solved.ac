@@ -27,7 +27,7 @@ export class Heap<T> {
     }
   }
 
-  peek = () => this.heap[0];
+  peek = () => this.heap[1];
 
   insert(item: T) {
     let i = ++this.size;
@@ -67,26 +67,3 @@ export class Heap<T> {
     return item;
   }
 }
-
-import fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "/input.txt";
-var input = fs.readFileSync(__dirname + filePath).toString();
-
-export const solution = (stdinInput: string) => {
-  const [N, ...arr] = stdinInput.trim().split(/\s/).map(Number);
-
-  let heap = new Heap<number>();
-  let result: number[] = [];
-
-  arr.map((value) => {
-    if (value === 0) {
-      result.push(heap.delete());
-    } else {
-      heap.insert(value);
-    }
-  });
-
-  console.log(result.join("\n"));
-};
-
-solution(input);
