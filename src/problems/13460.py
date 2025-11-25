@@ -26,7 +26,7 @@ def bfs(rx, ry, bx, by):
         rx, ry, bx, by, cnt = queue.popleft()
 
         if cnt >= 10:
-            continue
+            return -1
 
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nrx, nry, rcnt = move(rx, ry, dx, dy, matrix)
@@ -36,7 +36,7 @@ def bfs(rx, ry, bx, by):
                 continue
 
             if matrix[nry][nrx] == "O":
-                return 1
+                return cnt + 1
 
             if nrx == nbx and nry == nby:
                 if rcnt > bcnt:
@@ -47,8 +47,7 @@ def bfs(rx, ry, bx, by):
             if (nrx, nry, nbx, nby) not in visited:
                 visited.add((nrx, nry, nbx, nby))
                 queue.append((nrx, nry, nbx, nby, cnt + 1))
-
-    return 0
+    return -1
 
 
 for i in range(N):
