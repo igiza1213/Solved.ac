@@ -76,9 +76,6 @@ def move_shark(x, y, matrix, loc, res, next_shark):
 
 
 def dfs(matrix, loc, res):
-    matrix = deepcopy(matrix)
-    loc = deepcopy(loc)
-
     x, y = loc[0]
 
     move_fish(matrix, loc)
@@ -93,6 +90,6 @@ def dfs(matrix, loc, res):
     move_shark(x, y, matrix, loc, res, next_shark)
 
 
-dfs(matrix, loc, ans)
+dfs(deepcopy(matrix), deepcopy(loc), ans)
 
 print(ans)
