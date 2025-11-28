@@ -45,28 +45,34 @@ def move_fish(matrix, loc):
         if x == -1 and y == -1:
             continue
 
-        d = matrix[y][x][1]
-        for i in range(8):
-            d = (d - 1 + i) % 8
-            matrix[y][x][1] = d + 1
+        for _ in range(8):
+            d = matrix[y][x][1] - 1
             dx, dy = direction[d]
             nx, ny = x + dx, y + dy
 
             if 0 <= nx < 4 and 0 <= ny < 4 and matrix[ny][nx][0] != 0:
+                if matrix[ny][nx][0] > 0:
+                    loc[matrix[ny][nx][0]] = (x, y)
                 matrix[y][x], matrix[ny][nx] = matrix[ny][nx], matrix[y][x]
-                loc[matrix[y][x][0]], loc[matrix[ny][nx][0]] = (x, y), (nx, ny)
+                loc[i] = (nx, ny)
                 break
+
+            matrix[y][x][1] = (matrix[y][x][1] + 1) % 8
 
 
 def move_shark(x, y, matrix, loc, res, next_shark):
     for nx, ny in next_shark:
         fish = matrix[ny][nx][0]
         if fish != -1:
-            loc[fish] = (-1, -1)
-            loc[0] = (nx, ny)
-            matrix[ny][nx][0] = 0
-            matrix[y][x][0] = -1
-            dfs(matrix, loc, res + fish)
+            new_matrix = deepcopy(matrix)
+            new_loc = deepcopy(loc)
+
+            new_loc[fish] = (-1, -1)
+            new_loc[0] = (nx, ny)
+            new_matrix[ny][nx][0] = 0
+            new_matrix[y][x][0] = -1
+
+            dfs(new_matrix, new_loc, res + fish)
 
 
 def dfs(matrix, loc, res):
