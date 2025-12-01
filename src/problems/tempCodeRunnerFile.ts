@@ -1,0 +1,1 @@
+vowels.some((v) => v === S[i])

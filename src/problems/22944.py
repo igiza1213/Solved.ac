@@ -9,34 +9,39 @@ res = -1
 
 
 def bfs(x, y):
-    queue = deque([[x, y, 0, 0, H]])
+    queue = deque([[x, y, H, 0, 0]])
     visited = [[0] * N for _ in range(N)]
-    visited[y][x] = 1
+    visited[y][x] = H
 
     while queue:
-        x, y, cnt, u, h = queue.popleft()
-
-        if matrix[y][x] == "E":
-            return res
+        x, y, h, u, cnt = queue.popleft()
 
         for dx, dy in direction:
             nx, ny = x + dx, y + dy
 
-            if 0 <= nx < N and 0 <= ny < N and visited[ny][nx] == 0:
+            if 0 <= nx < N and 0 <= ny < N:
+
+                if matrix[ny][nx] == "E":
+                    return cnt + 1
+
+                nu, nh = u, h
 
                 if matrix[ny][nx] == "U":
-                    u = D
+                    nu = D
 
-                if u > 0:
-                    u -= 1
+                if nu == 0:
+                    nh -= 1
                 else:
-                    h -= 1
+                    nu -= 1
 
-                if h == 0:
+                if nh == 0:
                     continue
 
-                queue.append([nx, ny, cnt + 1, u, h])
-                visited[ny][nx] = 1
+                if visited[ny][nx] < nh:
+                    visited[ny][nx] = nh
+                    queue.append((nx, ny, nh, nu, cnt + 1))
+
+    return -1
 
 
 for y in range(N):
