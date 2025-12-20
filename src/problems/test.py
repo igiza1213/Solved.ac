@@ -1,48 +1,41 @@
-N = int(input())
-matrix = [list(map(int, input().split())) for _ in range(N)]
+T = int(input())
 
-white = []
-black = []
-
-for y in range(N):
-    for x in range(N):
-        if matrix[y][x] == 1:
-            if (x + y) % 2 == 0:
-                white.append((x, y))
-            else:
-                black.append((x, y))
-
-di1 = [0] * (2 * N)
-di2 = [0] * (2 * N)
+INF = 10**9
 
 
-def isAble(x, y):
-    if not di1[x + y] and not di2[y - x + N]:
-        return True
-    return False
+def bellman_ford(start):
+    dist = [INF] * (N + 1)
+    dist[start] = 0
+
+    for _ in range(N - 1):
+        flag = False
+        for u, v, w in edge:
+            if dist[u] != INF:
+                dist[v] = min(dist[v], dist[u] + w)
+                flag = True
+        if not flag:
+            break
+
+    for u, v, w in edge:
+        if dist[u] != INF and dist[v] > dist[u] + w:
+            return False
+
+    return dist
 
 
-def dfs(i, arr, cnt):
-    if i == len(arr):
-        global res
-        res = max(res, cnt)
-        return
+for _ in range(T):
+    N, M, W = map(int, input().split())
 
-    x, y = arr[i]
-    if isAble(x, y):
-        di1[x + y] = di2[y - x + N] = 1
-        dfs(i + 1, arr, cnt + 1)
-        di1[x + y] = di2[y - x + N] = 0
-    dfs(i + 1, arr, cnt)
+    edge = []
+    for _ in range(M):
+        u, v, w = map(int, input().split())
+        edge.append((u, v, w))
 
+    for _ in range(W):
+        u, v, w = map(int, input().split())
+        edge.append((u, v, -w))
 
-ans = 0
-res = 0
-dfs(0, black, 0)
-ans += res
+    dist = bellman_ford(1)
 
-res = 0
-dfs(0, white, 0)
-ans += res
-
-print(ans)
+    if dist:
+        print(dist[1])
